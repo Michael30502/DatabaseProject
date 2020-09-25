@@ -34,4 +34,9 @@ connection.close();
     public void mousePressed() {
       //  System.out.println(but.registerClick(mousePressed));
     }
+
+    @Override
+    public void keyTyped() {
+        
+    }
 }
