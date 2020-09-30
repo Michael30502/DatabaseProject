@@ -1,8 +1,12 @@
 import processing.core.PApplet;
+import sun.security.util.Password;
+
+import javax.swing.*;
 import java.security.*;
 public class Enkrypt {
     PApplet p;
     String inputstring = "";
+    String hent;
     String hemmeligcifer = null;
 
     String bytestilHex(byte[] k) {
@@ -24,10 +28,22 @@ public class Enkrypt {
 
     Enkrypt(PApplet p, String hemmeligcifer) {
         this.hemmeligcifer = hemmeligcifer;
+        this.hent=hent;
     }
 
-    void display() {
+    void convert() {
 p.background(252,150,107);
+try {
+MessageDigest Enkrypt = MessageDigest.getInstance("MD5");
+Enkrypt.update(inputstring.getBytes());
+byte[] outputstring = Enkrypt.digest();
+hemmeligcifer = bytestilHex(outputstring);
+
+}
+catch(Exception erderenexception) {
+    p.println("Exception: " + erderenexception);
+
+}
 
     }
 }
