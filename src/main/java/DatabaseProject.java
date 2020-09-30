@@ -57,6 +57,7 @@ InputField username = new InputField(this,400,400,200,50,"Username");
      //   but.draw();
         username.display();
         password.display();
+
     }
 
     @Override
