@@ -35,6 +35,7 @@ public class DatabaseProject extends PApplet {
 Button but = new Button(this,100,100,200,200);
 InputField username = new InputField(this,400,400,200,50,"Username");
     InputField password = new InputField(this,400,600,200,50,"Password");
+    Background background = new Background(this);
     boolean usernameCheck, passwordCheck;
     String inputStringU,inputStringP;
 
@@ -50,6 +51,7 @@ InputField username = new InputField(this,400,400,200,50,"Username");
      //   but.draw();
         username.display();
         password.display();
+        background.draw();
     }
 
     @Override
