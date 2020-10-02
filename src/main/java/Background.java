@@ -4,7 +4,6 @@ public class Background {
 
     PApplet p;
     boolean inputCheckChat;
-    InputField chatfield = new InputField(p,300,820,600,160,"Chat");
     Background(PApplet p){
         this.p=p;
 
@@ -17,8 +16,7 @@ public class Background {
         p.rect(200,800,800,200);
         p.rect(200,0,800,100);
         p.fill(0);
-        chatfield.input(inputCheckChat,p.key);
-        chatfield.display();
+
 
 
     }

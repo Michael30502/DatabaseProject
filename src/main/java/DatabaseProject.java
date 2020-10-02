@@ -2,6 +2,7 @@ import processing.core.PApplet;
 import java.sql.*;
 import javax.crypto.*;
 import java.security.*;
+import java.util.ArrayList;
 import java.util.Base64;
 public class DatabaseProject extends PApplet {
 
@@ -42,49 +43,87 @@ pt.executeUpdate();
 Button but = new Button(this,100,100,200,200);
 InputField username = new InputField(this,400,400,200,50,"Username");
     InputField password = new InputField(this,400,600,200,50,"Password");
+    InputField chatfield = new InputField(this,300,820,600,160,"Chat");
+    ArrayList<Messege> messegeList = new ArrayList<>();
     Background background = new Background(this);
-    boolean usernameCheck, passwordCheck;
-    String inputStringU,inputStringP;
-
+    boolean usernameCheck, passwordCheck, chatCheck;
+    String inputStringU,inputStringP,inputStringC;
+    int count;
+    boolean login=true;
+    boolean chat=false;
 
     @Override
     public void settings() {
         super.settings();
         size(1000,1000);
+        chatfield.p=this;
     }
 
     @Override
     public void draw() {
      //   but.draw();
-        username.display();
-        password.display();
         background.draw();
+        if(login==true) {
+            username.display();
+            password.display();
+        }
+        if(chat==true) {
+            chatfield.display();
+            for (int i = 0; i < messegeList.size(); i++) {
+                messegeList.get(i).draw(i, count);
+            }
+        }
     }
 
     @Override
     public void mousePressed() {
       //  System.out.println(but.registerClick(mousePressed));
-        usernameCheck=false;
-        passwordCheck=false;
-        usernameCheck=username.mouseCollision(mouseX,mouseY);
-        passwordCheck=password.mouseCollision(mouseX,mouseY);
+        if(login==true) {
+            usernameCheck = false;
+            passwordCheck = false;
+            usernameCheck = username.mouseCollision(mouseX, mouseY);
+            passwordCheck = password.mouseCollision(mouseX, mouseY);
+        }
+        if(chat==true) {
+            chatCheck = false;
+            chatCheck = chatfield.mouseCollision(mouseX, mouseY);
+        }
+
     }
 
     @Override
     public void keyTyped() {
-    if(usernameCheck==true)
-            inputStringU=username.input(true,key);
-        if(passwordCheck==true)
-            inputStringP=password.input(true,key);
+
+        if(login==true) {
+            if (usernameCheck == true)
+                inputStringU = username.input(true, key);
+            if (passwordCheck == true)
+                inputStringP = password.input(true, key);
+        }
+        if(chat==true){
+        if(chatCheck==true)
+            inputStringC=chatfield.input(true,key);
+        if(key==ENTER) {
+            messegeList.add(new Messege(this, inputStringC, 300, 800));
+            chatfield.inputString = "";
+            count++;
+        }
+        }
     }
 
 
     @Override
     public void keyReleased() {
-        if(usernameCheck==true)
-            inputStringU=username.input(false,key);
-        if(passwordCheck==true)
-            inputStringP=password.input(false,key);
+        if(login==true) {
+            if (usernameCheck == true)
+                inputStringU = username.input(false, key);
+            if (passwordCheck == true)
+                inputStringP = password.input(false, key);
+        }
+        if(chat==true) {
+            if (chatCheck == true)
+                inputStringC = chatfield.input(false, key);
+        }
     }
 
 }
