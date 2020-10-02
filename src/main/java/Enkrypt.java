@@ -33,6 +33,7 @@ public class Enkrypt {
 
     void convert() {
 p.background(252,150,107);
+//Indsæt Her : hent.get(Inputstring) med rigtige værdier.
 try {
 MessageDigest Enkrypt = MessageDigest.getInstance("MD5");
 Enkrypt.update(inputstring.getBytes());

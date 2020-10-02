@@ -25,7 +25,7 @@ public class InputField {
         if (check) {
 
             if (key != '\b' && key != p.CODED) {
-                if((type.equals("Username")&&inputString.length()<20)||(type.equals("Password")&&inputString.length()<20)) {
+                if((type.equals("Username")&&inputString.length()<20)||(type.equals("Password")&&inputString.length()<20)||type.equals("Chat")) {
                     inputString += key;
 
                     inputString = inputString.replaceAll("[^\\p{javaWhitespace}\\p{Alnum}(-)]", "");
@@ -54,6 +54,7 @@ public class InputField {
         p.fill(255);
         p.rect(x,y,w,h);
         p.fill(0);
+        System.out.println(inputString);
         p.text(inputString, x+5, y+h/2+7);
         if(type.equals("Username"))
             p.text("Username",x-100,y+h/2+7);
