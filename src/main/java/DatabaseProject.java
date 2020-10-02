@@ -9,17 +9,15 @@ public class DatabaseProject extends PApplet {
 
 
 
+
     public static void main(String[] args ) {
         PApplet.main("DatabaseProject");
         try {
-            Connection conn = DriverManager.getConnection(
-                    "jdbc:ucanaccess://src//main//resources//DatabaseUsers.accdb");
-            String p = "INSERT INTO Users ([Username],[Password]) VALUES (?,?)";
-            PreparedStatement pt = conn.prepareStatement(p);
-pt.setString(1,"Mathias");
-pt.setString(2,"Lugte");
-pt.executeUpdate();
-            Statement s = conn.createStatement();
+
+
+
+
+
           //  p.executeUpdate("INSERT INTO Users VALUES (Mathias,Lugte)");
            /*
             ResultSet rs = s.executeQuery("SELECT [Username] FROM [Users]");
@@ -42,15 +40,24 @@ pt.executeUpdate();
 	
 Button but = new Button(this,100,100,200,200);
 InputField username = new InputField(this,400,400,200,50,"Username");
+
     InputField password = new InputField(this,400,600,200,50,"Password");
+
+    boolean usernameCheck, passwordCheck;
+    String inputStringU,inputStringP;
+    SQL sql = new SQL();
+
     InputField chatfield = new InputField(this,300,820,600,160,"Chat");
     ArrayList<Messege> messegeList = new ArrayList<>();
     Background background = new Background(this);
     boolean usernameCheck, passwordCheck, chatCheck;
     String inputStringU,inputStringP,inputStringC;
+    Button loginbutton = new Button(this,400,700,80,30);
+    Button registerbutton = new Button(this,520,700,80,30);
     int count;
     boolean login=true;
     boolean chat=false;
+
 
     @Override
     public void settings() {
@@ -60,12 +67,33 @@ InputField username = new InputField(this,400,400,200,50,"Username");
     }
 
     @Override
+    public void setup() {
+        super.setup();
+sql.sqlSetup();
+sql.setData("grt","lflpd");
+        sql.setData("wvo","gllg");
+        sql.setData("erog","tgkmr");
+        sql.setData("grnkrlk","krego");
+        sql.setData("gkpor","gtme");
+        sql.setData("lmrtk","gmklrt");
+        sql.setData("grtl","ktrmh");
+
+        }
+
+
+    @Override
     public void draw() {
      //   but.draw();
         background.draw(login,chat);
         if(login==true) {
             username.display();
             password.display();
+            loginbutton.draw();
+            registerbutton.draw();
+            fill(0);
+            text("Login",425,720);
+            text("Register",535,720);
+
            /* if(inputStringU=="username"&&inputStringP=="password"){
                 login=false;
                 chat=true;
@@ -87,6 +115,8 @@ InputField username = new InputField(this,400,400,200,50,"Username");
             passwordCheck = false;
             usernameCheck = username.mouseCollision(mouseX, mouseY);
             passwordCheck = password.mouseCollision(mouseX, mouseY);
+            loginbutton.registerClick(mousePressed);
+            registerbutton.registerClick(mousePressed);
         }
         if(chat==true) {
             chatCheck = false;

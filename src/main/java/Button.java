@@ -13,7 +13,7 @@ public class Button {
     }
 
     void draw() {
-        p.fill(255,0,255);
+        p.fill(255);
     p.rect(posX,posY,width,height);
 
     }
