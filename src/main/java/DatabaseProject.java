@@ -62,10 +62,14 @@ InputField username = new InputField(this,400,400,200,50,"Username");
     @Override
     public void draw() {
      //   but.draw();
-        background.draw();
+        background.draw(login,chat);
         if(login==true) {
             username.display();
             password.display();
+           /* if(inputStringU=="username"&&inputStringP=="password"){
+                login=false;
+                chat=true;
+            }*/
         }
         if(chat==true) {
             chatfield.display();
