@@ -48,6 +48,8 @@ InputField username = new InputField(this,400,400,200,50,"Username");
     Background background = new Background(this);
     boolean usernameCheck, passwordCheck, chatCheck;
     String inputStringU,inputStringP,inputStringC;
+    Button loginbutton = new Button(this,400,700,80,30);
+    Button registerbutton = new Button(this,520,700,80,30);
     int count;
     boolean login=true;
     boolean chat=false;
@@ -66,6 +68,12 @@ InputField username = new InputField(this,400,400,200,50,"Username");
         if(login==true) {
             username.display();
             password.display();
+            loginbutton.draw();
+            registerbutton.draw();
+            fill(0);
+            text("Login",425,720);
+            text("Register",535,720);
+
            /* if(inputStringU=="username"&&inputStringP=="password"){
                 login=false;
                 chat=true;
@@ -87,6 +95,8 @@ InputField username = new InputField(this,400,400,200,50,"Username");
             passwordCheck = false;
             usernameCheck = username.mouseCollision(mouseX, mouseY);
             passwordCheck = password.mouseCollision(mouseX, mouseY);
+            loginbutton.registerClick(mousePressed);
+            registerbutton.registerClick(mousePressed);
         }
         if(chat==true) {
             chatCheck = false;
