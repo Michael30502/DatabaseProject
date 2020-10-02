@@ -13,7 +13,14 @@ public class DatabaseProject extends PApplet {
         try {
             Connection conn = DriverManager.getConnection(
                     "jdbc:ucanaccess://src//main//resources//DatabaseUsers.accdb");
+            String p = "INSERT INTO Users ([Username],[Password]) VALUES (?,?)";
+            PreparedStatement pt = conn.prepareStatement(p);
+pt.setString(1,"Mathias");
+pt.setString(2,"Lugte");
+pt.executeUpdate();
             Statement s = conn.createStatement();
+          //  p.executeUpdate("INSERT INTO Users VALUES (Mathias,Lugte)");
+           /*
             ResultSet rs = s.executeQuery("SELECT [Username] FROM [Users]");
             ResultSet rp = s.executeQuery("SELECT [Password] FROM [Users]");
             while (rs.next()) {
@@ -24,7 +31,7 @@ public class DatabaseProject extends PApplet {
                 System.out.println("");
 
             }
-
+*/
         }catch (Exception ex){
             System.out.println(ex);
         }
