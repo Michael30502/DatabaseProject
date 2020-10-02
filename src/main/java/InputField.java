@@ -25,11 +25,11 @@ public class InputField {
         if (check) {
 
             if (key != '\b' && key != p.CODED) {
-                if((type.equals("Username")&&inputString.length()<29)||(type.equals("Password")&&inputString.length()<4)) {
+                if((type.equals("Username")&&inputString.length()<20)||(type.equals("Password")&&inputString.length()<20)) {
                     inputString += key;
 
                     inputString = inputString.replaceAll("[^\\p{javaWhitespace}\\p{Alnum}(-)]", "");
-                    inputString = inputString.toUpperCase();
+                   // inputString = inputString.toUpperCase();
 
                 }
             } else {
