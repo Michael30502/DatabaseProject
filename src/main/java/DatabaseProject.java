@@ -43,8 +43,7 @@ InputField username = new InputField(this,400,400,200,50,"Username");
 
     InputField password = new InputField(this,400,600,200,50,"Password");
 
-    boolean usernameCheck, passwordCheck;
-    String inputStringU,inputStringP;
+
     SQL sql = new SQL();
 
     InputField chatfield = new InputField(this,300,820,600,160,"Chat");
@@ -54,9 +53,10 @@ InputField username = new InputField(this,400,400,200,50,"Username");
     String inputStringU,inputStringP,inputStringC;
     Button loginbutton = new Button(this,400,700,80,30);
     Button registerbutton = new Button(this,520,700,80,30);
+    ArrayList<Users> userList = new ArrayList<>();
     int count;
-    boolean login=true;
-    boolean chat=false;
+    boolean login=false;
+    boolean chat=true;
 
 
     @Override
@@ -78,6 +78,9 @@ sql.setData("grt","lflpd");
         sql.setData("lmrtk","gmklrt");
         sql.setData("grtl","ktrmh");
 
+        for(int i = 0;i<5;i++){
+        userList.add(new Users(this,0,100+150*i,messegeList));
+        }
         }
 
 
@@ -101,9 +104,14 @@ sql.setData("grt","lflpd");
         }
         if(chat==true) {
             chatfield.display();
+            for(int i = 0;i<userList.size();i++){
+                userList.get(i).display();
+                System.out.println(userList.get(i).selected(mouseX,mouseY));
+            }
             for (int i = 0; i < messegeList.size(); i++) {
                 messegeList.get(i).draw(i, count);
             }
+
         }
     }
 
