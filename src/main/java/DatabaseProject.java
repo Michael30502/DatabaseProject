@@ -47,13 +47,13 @@ InputField username = new InputField(this,400,400,200,50,"Username");
     SQL sql = new SQL();
 
     InputField chatfield = new InputField(this,300,820,600,160,"Chat");
-    ArrayList<Messege> messegeList = new ArrayList<>();
     Background background = new Background(this);
     boolean usernameCheck, passwordCheck, chatCheck;
     String inputStringU,inputStringP,inputStringC;
     Button loginbutton = new Button(this,400,700,80,30);
     Button registerbutton = new Button(this,520,700,80,30);
     ArrayList<Users> userList = new ArrayList<>();
+    ArrayList<ArrayList<Messege>> messegeListList = new ArrayList<>();
     int count;
     boolean login=false;
     boolean chat=true;
@@ -79,7 +79,8 @@ sql.setData("grt","lflpd");
         sql.setData("grtl","ktrmh");
 
         for(int i = 0;i<5;i++){
-        userList.add(new Users(this,0,100+150*i,messegeList));
+            messegeListList.add(new ArrayList<>());
+        userList.add(new Users(this,0,100+150*i,messegeListList.get(i)));
         }
         }
 
@@ -102,14 +103,22 @@ sql.setData("grt","lflpd");
                 chat=true;
             }*/
         }
+        //her ser laver den alt der sker i draw ohase af selve chatten
         if(chat==true) {
             chatfield.display();
             for(int i = 0;i<userList.size();i++){
                 userList.get(i).display();
-                System.out.println(userList.get(i).selected(mouseX,mouseY));
+                userList.get(i).selected(mouseX,mouseY);
+                for(int j = 0;j<userList.size();j++){
+                    if(userList.get(i).alredyselected==true&&i!=j)
+                        userList.get(j).alredyselected=false;
+                }
             }
-            for (int i = 0; i < messegeList.size(); i++) {
-                messegeList.get(i).draw(i, count);
+            for (int i = 0; i < userList.size(); i++) {
+                if(userList.get(i).alredyselected) {
+                    for (int j = 0; j < messegeListList.get(i).size(); j++)
+                        messegeListList.get(i).get(j).draw(j, userList.get(i).count);
+                }
             }
 
         }
@@ -146,9 +155,13 @@ sql.setData("grt","lflpd");
         if(chatCheck==true)
             inputStringC=chatfield.input(true,key);
         if(key==ENTER) {
-            messegeList.add(new Messege(this, inputStringC, 300, 800));
-            chatfield.inputString = "";
-            count++;
+            for(int i = 0; i<userList.size();i++){
+                if(userList.get(i).alredyselected) {
+                    messegeListList.get(i).add(new Messege(this, inputStringC, 300, 800));
+                    chatfield.inputString = "";
+                    userList.get(i).count++;
+                }
+            }
         }
         }
     }

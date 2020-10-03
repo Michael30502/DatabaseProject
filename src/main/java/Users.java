@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Users {
     PApplet p;
     int posx,posy;
+    boolean alredyselected =false;
+    int count;
     Users(PApplet p, int posx, int posy, ArrayList<Messege> messegeList){
         this.p=p;
         this.posx=posx;
@@ -12,11 +14,14 @@ public class Users {
     }
 
     void display(){
-        if(selected(p.mouseX,p.mouseY)==false)
+
         p.fill(82,194,255);
-        if(selected(p.mouseX,p.mouseY)==true)
-            p.fill(82,154,255);
+        if((selected(p.mouseX,p.mouseY)==true&&p.mousePressed)||alredyselected) {
+            p.fill(82, 154, 255);
+            alredyselected=true;
+        }
         p.rect(posx,posy,200,150);
+
     }
 
     boolean selected(int mousex,int mousey){
