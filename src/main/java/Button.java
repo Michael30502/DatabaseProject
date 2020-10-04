@@ -18,6 +18,7 @@ public class Button {
 
     }
     Boolean registerClick(boolean mPressed){
+
         boolean d;
     if(mPressed && p.mouseX>posX && p.mouseX<posX+width && p.mouseY>posY && p.mouseY<posY+height) {
         d=true;

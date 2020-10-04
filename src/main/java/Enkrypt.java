@@ -26,25 +26,28 @@ public class Enkrypt {
 
     }
 
-    Enkrypt(PApplet p, String hemmeligcifre) {
-        this.hemmeligcifer = hemmeligcifre;
+    Enkrypt(PApplet p) {
+       // this.hemmeligcifer = hemmeligcifre;
+        this.p = p;
         this.hent=hent;
     }
 
-    void convert() {
+    String convert(String inputstring) {
 p.background(252,150,107);
-//Indsæt Her : hent.get(Inputstring) med rigtige værdier.
+
 try {
 MessageDigest Enkrypt = MessageDigest.getInstance("MD5");
 Enkrypt.update(inputstring.getBytes());
 byte[] outputstring = Enkrypt.digest();
 hemmeligcifer = bytestilHex(outputstring);
-
+System.out.println(hemmeligcifer);
+    return hemmeligcifer;
 }
 catch(Exception erderenexception) {
     p.println("Exception: " + erderenexception);
-
+return "";
 }
 
     }
+
 }

@@ -17,7 +17,7 @@ InputField username = new InputField(this,400,400,200,50,"Username");
 
     InputField password = new InputField(this,400,600,200,50,"Password");
 
-
+    Enkrypt enkrypt = new Enkrypt(this);
     SQL sql = new SQL();
 
     InputField chatfield = new InputField(this,300,820,600,160,"Chat");
@@ -110,24 +110,33 @@ InputField username = new InputField(this,400,400,200,50,"Username");
             passwordCheck = false;
             usernameCheck = username.mouseCollision(mouseX, mouseY);
             passwordCheck = password.mouseCollision(mouseX, mouseY);
+
             if(loginbutton.registerClick(mousePressed)){
+
                 try{
-                    if(sql.checkLogin(inputStringU,inputStringP)==true){
+
+                    String passwordKrypt = enkrypt.convert(inputStringP);
+                    if(sql.checkLogin(inputStringU,passwordKrypt)==true){
                         currentUser = inputStringU;
                     login = false;
                     }
-                }catch (Exception Invalid){
-
+                }catch (Exception invalid){
+System.out.println("invalid" + invalid);
                 }
             }
 
             if (registerbutton.registerClick(mousePressed)){
-                try{
-                sql.setData(inputStringU,inputStringP);
-                login = false;
-                    currentUser = inputStringU;
-                }catch (Exception Invalid){
 
+
+                try{
+                    String passwordKrypt = enkrypt.convert(inputStringP);
+
+               if( sql.setData(inputStringU,passwordKrypt)) {
+                   login = false;
+                   currentUser = inputStringU;
+               }
+                }catch (Exception invalid){
+System.out.println("rInvalid" + invalid);
                 }
             }
         }
@@ -153,7 +162,7 @@ InputField username = new InputField(this,400,400,200,50,"Username");
         if(key==ENTER) {
             for(int i = 0; i<userList.size();i++){
                 if(userList.get(i).alreadySelected) {
-                    
+
                     sql.putMessage(chatfield.inputString,this);
                     messageList = sql.addMessages(messageList,this);
                     chatfield.inputString = "";

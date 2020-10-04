@@ -24,7 +24,7 @@ public class SQL {
         }
     }
 
-    void setData(String username, String password) {
+    boolean setData(String username, String password) {
 
         try {
             Statement s = conn.createStatement();
@@ -43,9 +43,10 @@ public class SQL {
             pt.setString(2, password);
             pt.execute();
             System.out.println("User: " + username + " has been inserted with password: " + password);
-
+return true;
         } catch (Exception FORK) {
             System.out.println("Setdata:  " + FORK);
+            return false;
         }
 
     }
