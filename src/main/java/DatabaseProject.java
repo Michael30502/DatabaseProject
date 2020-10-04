@@ -27,10 +27,12 @@ InputField username = new InputField(this,400,400,200,50,"Username");
     Button loginbutton = new Button(this,400,700,80,30);
     Button registerbutton = new Button(this,520,700,80,30);
     ArrayList<Users> userList = new ArrayList<>();
+    ArrayList<Message> messageList = new ArrayList<>();
     ArrayList<ArrayList<Message>> messageListList = new ArrayList<>();
     int count;
     boolean login=true;
-
+    boolean check = true;
+    String currentUser;
 
 
     @Override
@@ -43,18 +45,26 @@ InputField username = new InputField(this,400,400,200,50,"Username");
     @Override
     public void setup() {
         super.setup();
-sql.sqlSetup();
+        sql.sqlSetup();
 
 
         for(int i = 0;i<5;i++){
-            messageListList.add(new ArrayList<>());
-        userList.add(new Users(this,0,100+150*i, messageListList.get(i)));
+           // messageListList.add(new ArrayList<>());
+
         }
         }
 
 
     @Override
     public void draw() {
+
+        if(login == true && check == true){
+            userList=sql.addUsers(userList,this);
+            messageList = sql.addMessages(messageList,this);
+            check = false;
+        }
+
+
      //   but.draw();
         background.draw(login);
         if(login==true) {
@@ -78,14 +88,14 @@ sql.sqlSetup();
                 userList.get(i).display();
                 userList.get(i).selected(mouseX,mouseY);
                 for(int j = 0;j<userList.size();j++){
-                    if(userList.get(i).alredyselected==true&&i!=j)
-                        userList.get(j).alredyselected=false;
+                    if(userList.get(i).alreadySelected ==true&&i!=j)
+                        userList.get(j).alreadySelected =false;
                 }
             }
             for (int i = 0; i < userList.size(); i++) {
-                if(userList.get(i).alredyselected) {
-                    for (int j = 0; j < messageListList.get(i).size(); j++)
-                        messageListList.get(i).get(j).draw(j, userList.get(i).count);
+                if(userList.get(i).alreadySelected) {
+                    for (int j = 0; j < messageList.size(); j++)
+                        messageList.get(j).draw(j, userList.get(i).count);
                 }
             }
 
@@ -102,8 +112,10 @@ sql.sqlSetup();
             passwordCheck = password.mouseCollision(mouseX, mouseY);
             if(loginbutton.registerClick(mousePressed)){
                 try{
-                    if(sql.checkLogin(inputStringU,inputStringP)==true)
+                    if(sql.checkLogin(inputStringU,inputStringP)==true){
+                        currentUser = inputStringU;
                     login = false;
+                    }
                 }catch (Exception Invalid){
 
                 }
@@ -113,6 +125,7 @@ sql.sqlSetup();
                 try{
                 sql.setData(inputStringU,inputStringP);
                 login = false;
+                    currentUser = inputStringU;
                 }catch (Exception Invalid){
 
                 }
@@ -134,13 +147,15 @@ sql.sqlSetup();
             if (passwordCheck == true)
                 inputStringP = password.input(true, key);
         }
-        if(login==true){
+        if(login==false){
         if(chatCheck==true)
             inputStringC=chatfield.input(true,key);
         if(key==ENTER) {
             for(int i = 0; i<userList.size();i++){
-                if(userList.get(i).alredyselected) {
-                    messageListList.get(i).add(new Message(this, inputStringC, 300, 800));
+                if(userList.get(i).alreadySelected) {
+                    
+                    sql.putMessage(chatfield.inputString,this);
+                    messageList = sql.addMessages(messageList,this);
                     chatfield.inputString = "";
                     userList.get(i).count++;
                 }

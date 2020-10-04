@@ -4,28 +4,30 @@ import java.util.ArrayList;
 
 public class Users {
     PApplet p;
-    int posx,posy;
-    boolean alredyselected =false;
+    String username;
+    int posX, posY;
+    boolean alreadySelected =false;
     int count;
-    Users(PApplet p, int posx, int posy, ArrayList<Message> messegeList){
+    Users(PApplet p, int posX, int posY, String username){
         this.p=p;
-        this.posx=posx;
-        this.posy=posy;
+        this.posX = posX;
+        this.posY = posY;
+        this.username = username;
     }
 
     void display(){
 
         p.fill(82,194,255);
-        if((selected(p.mouseX,p.mouseY)==true&&p.mousePressed)||alredyselected) {
+        if((selected(p.mouseX,p.mouseY)==true&&p.mousePressed)|| alreadySelected) {
             p.fill(82, 154, 255);
-            alredyselected=true;
+            alreadySelected =true;
         }
-        p.rect(posx,posy,200,150);
+        p.rect(posX, posY,200,150);
 
     }
 
-    boolean selected(int mousex,int mousey){
-        if(mousex>posx&&mousex<posx+200&&mousey>posy&&mousey<posy+150){
+    boolean selected(int mouseX,int mouseY){
+        if(mouseX> posX &&mouseX< posX +200&&mouseY> posY &&mouseY< posY +150){
             return  true;
         }
 return false;
