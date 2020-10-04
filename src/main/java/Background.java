@@ -9,14 +9,14 @@ public class Background {
 
     }
 
-    void draw(boolean login,boolean chat){
+    void draw(boolean login){
 
         if(login==true){
             p.background(168,255,255);
 
         }
 
-        if(chat==true){
+        if(login==false){
         p.background(168,255,255);
         p.fill(82,219,255);
         p.rect(0,0,200,1000);

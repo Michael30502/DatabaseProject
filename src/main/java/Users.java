@@ -7,7 +7,7 @@ public class Users {
     int posx,posy;
     boolean alredyselected =false;
     int count;
-    Users(PApplet p, int posx, int posy, ArrayList<Messege> messegeList){
+    Users(PApplet p, int posx, int posy, ArrayList<Message> messegeList){
         this.p=p;
         this.posx=posx;
         this.posy=posy;

@@ -13,7 +13,7 @@ public class Enkrypt {
         // Her bruges Hexdigits det vil sige hexdecimaler som går fra 1-16 som går fra 0-9 og A-F.
         char hexdecimaler[] = {
                 '0', '1', '2', '3', '4', '5', '6', '7',
-                '8', '9', 'A', 'B', 'C', 'D', 'E',
+                '8', '9', 'A', 'B', 'C', 'D', 'E','F'
         }//Skal lukke char'en.
                 ;
         StringBuffer henter = new StringBuffer();//En stringfield
@@ -26,8 +26,8 @@ public class Enkrypt {
 
     }
 
-    Enkrypt(PApplet p, String hemmeligcifer) {
-        this.hemmeligcifer = hemmeligcifer;
+    Enkrypt(PApplet p, String hemmeligcifre) {
+        this.hemmeligcifer = hemmeligcifre;
         this.hent=hent;
     }
 

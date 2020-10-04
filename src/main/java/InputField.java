@@ -12,7 +12,6 @@ public class InputField {
     InputField(PApplet p,int x,int y,int w,int h,String type){
 
         this.p=p;
-
         this.x=x;
         this.y=y;
         this.w=w;
@@ -54,7 +53,7 @@ public class InputField {
         p.fill(255);
         p.rect(x,y,w,h);
         p.fill(0);
-        System.out.println(inputString);
+        //System.out.println(inputString);
         p.text(inputString, x+5, y+h/2+7);
         if(type.equals("Username"))
             p.text("Username",x-100,y+h/2+7);
